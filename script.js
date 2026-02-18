@@ -209,7 +209,7 @@ startBtn.addEventListener("click", () => {
 // 効果音スイッチの確認ダイアログ
 seSwitch.addEventListener('change', () => {
   if (seSwitch.checked) {
-    const confirmed = confirm("効果音を有効にしますか？\n（スピーカーの音量にご注意ください）");
+    const confirmed = confirm("予備の鼓膜はありますか？\n周囲に身内等いませんか？");
     if (!confirmed) {
       seSwitch.checked = false;
     }
@@ -220,3 +220,4 @@ window.addEventListener('load', () => {
   if (bgmSwitch) bgmSwitch.checked = false;
   if (seSwitch) seSwitch.checked = false;
 });
+
