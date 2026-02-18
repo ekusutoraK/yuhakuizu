@@ -184,3 +184,8 @@ startBtn.addEventListener("click", () => {
   menuTrigger.classList.add("hidden");
   initQuiz();
 });
+
+// ページ読み込み時にBGMスイッチを確実にオフにする(強制命令)
+window.addEventListener('load', () => {
+  if (bgmSwitch) bgmSwitch.checked = false;
+});
