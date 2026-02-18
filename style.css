@@ -24,7 +24,6 @@ body {
   position: relative;
 }
 
-/* 左上のメニューボタン */
 #menu-trigger {
   position: absolute;
   top: 15px;
@@ -37,7 +36,6 @@ body {
   z-index: 10;
 }
 
-/* 浮かび上がるメニュー */
 #side-menu {
   position: absolute;
   top: 55px;
@@ -71,7 +69,6 @@ body {
   cursor: pointer;
 }
 
-/* ボタン（緑） */
 #start-btn, #choices button, .retry-btn {
   display: block;
   margin: 10px auto;
@@ -86,7 +83,6 @@ body {
   font-weight: bold;
 }
 
-/* 選択・正解・不正解の状態 */
 #choices button.selected { background-color: #00BFFF !important; }
 #choices button.correct-ans { background-color: #00BFFF !important; }
 #choices button.wrong-ans { background-color: #FF4444 !important; }
