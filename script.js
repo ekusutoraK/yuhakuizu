@@ -77,8 +77,9 @@ function showQuestion() {
     btn.className = "choice-btn";
     btn.addEventListener("click", () => {
       if (answered) return;
-      Array.from(choicesEl.children).forEach(b => b.style.backgroundColor = "#4CAF50");
-      btn.style.backgroundColor = "#00BFFF";
+      // すべてのボタンから selected クラスを消して、押したやつにだけつける
+      Array.from(choicesEl.children).forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
       selectedAnswer = choice;
     });
     choicesEl.appendChild(btn);
@@ -92,17 +93,16 @@ answerBtn.addEventListener("click", () => {
   }
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
+  
   Array.from(choicesEl.children).forEach(btn => {
     btn.disabled = true;
     if (btn.textContent === q.answer) {
-      btn.style.backgroundColor = "#00BFFF";
+      btn.classList.add("correct-ans"); // 正解は水色
       if(selectedAnswer === q.answer) score++;
     } else if (btn.textContent === selectedAnswer) {
-      btn.style.backgroundColor = "#FF4444";
+      btn.classList.add("wrong-ans"); // 間違いは赤
     } else {
-      btn.style.backgroundColor = "#CCCCCC";
-      btn.style.color = "#333";
-      btn.style.opacity = "0.6";
+      btn.classList.add("dim-ans"); // その他はグレー
     }
   });
   answerBtn.classList.add("hidden");
@@ -135,13 +135,11 @@ function showResult() {
   };
 
   const msg = messages[score] || { title: "結果", subtitle: `(${score}/7問正解)` };
-
   const titleDiv = document.createElement("div");
   titleDiv.textContent = msg.title.toUpperCase();
   titleDiv.style.fontSize = "24px";
   titleDiv.style.fontWeight = "bold";
   titleDiv.style.marginBottom = "10px";
-
   const subtitleDiv = document.createElement("div");
   subtitleDiv.textContent = msg.subtitle;
 
