@@ -23,76 +23,64 @@ body {
   text-align: center;
 }
 
-.quiz-container h1 {
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-#question {
-  font-size: 20px;
-  margin-bottom: 20px;
-  white-space: pre-line;
-}
-
-/* スタートボタン、選択肢ボタン、タイトルに戻るボタンを
-  一括で「絶対緑（!important）」に設定します
-*/
+/* 基本のボタン（緑） */
 #start-btn, 
 #choices button, 
-.retry-btn, 
-.choice-btn {
-  display: block !important;
-  margin: 10px auto !important;
-  padding: 15px !important;
-  width: 100% !important;
-  border: none !important;
-  border-radius: 10px !important;
-  background-color: #4CAF50 !important; /* 絶対に緑 */
-  color: white !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
-  font-weight: bold !important;
-  transition: 0.2s !important;
-  text-transform: none !important;
-  appearance: none !important; /* スマホ特有のボタンデザインを解除 */
+.retry-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50; /* 緑 */
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
-/* ホバー時の色 */
-#start-btn:hover, 
-#choices button:hover, 
-.retry-btn:hover {
-  background-color: #45a049 !important;
+/* 【重要】選択された時の色（水色） */
+#choices button.selected {
+  background-color: #00BFFF !important;
+}
+
+/* 正解の色 */
+#choices button.correct-ans {
+  background-color: #00BFFF !important;
+}
+
+/* 不正解の色 */
+#choices button.wrong-ans {
+  background-color: #FF4444 !important;
+}
+
+/* 選ばれなかったボタンを暗くする */
+#choices button.dim-ans {
+  background-color: #CCCCCC !important;
+  color: #333 !important;
+  opacity: 0.6;
+}
+
+#start-btn:hover, #choices button:hover:not(:disabled) {
+  background-color: #45a049;
   transform: scale(1.03);
 }
 
-/* 回答ボタン（青） */
-#answer-btn {
+#answer-btn, #next-btn {
   display: block;
   margin: 20px auto 10px;
   padding: 15px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  background-color: #2196F3 !important;
   color: white;
   font-weight: bold;
   cursor: pointer;
 }
 
-/* 次へボタン（オレンジ） */
-#next-btn {
-  display: block;
-  margin: 20px auto 10px;
-  padding: 15px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  background-color: #FF9800 !important;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
+#answer-btn { background-color: #2196F3; }
+#next-btn { background-color: #FF9800; }
 
-.hidden {
-  display: none !important;
-}
+.hidden { display: none !important; }
