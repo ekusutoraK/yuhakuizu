@@ -1,7 +1,7 @@
 body {
   font-family: "Arial", sans-serif;
-  /* URLを修正しました */
-  background-image: url('https://raw.githubusercontent.com/ekusutorak/yuhakuizu/main/background.jpg');
+  /* 画像の指定を相対パスに変更。これで確実に読み込めます */
+  background-image: url('background.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -11,22 +11,22 @@ body {
   justify-content: center;
   align-items: center;
   color: #fff;
+  background-color: #1a1a1a; /* 画像が読み込まれるまでの予備色 */
 }
 
 .quiz-container {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   padding: 30px;
   border-radius: 20px;
-  width: 80%;
+  width: 90%;
   max-width: 400px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
 .quiz-container h1 {
   margin-bottom: 20px;
   font-size: 28px;
-  letter-spacing: 1px;
 }
 
 #question {
@@ -35,48 +35,42 @@ body {
   white-space: pre-line;
 }
 
-/* 共通の緑ボタン（選択肢・スタート・戻る） */
+/* 緑色のボタン設定（選択肢、スタート、戻るすべて） */
 #choices button, #start-btn, .retry-btn {
   display: block;
   margin: 10px auto;
-  padding: 12px;
+  padding: 15px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4CAF50 !important; /* !importantでPCの古い設定を上書き */
+  color: white !important;
   cursor: pointer;
   font-size: 16px;
-  transition: 0.2s;
   font-weight: bold;
+  transition: 0.2s;
 }
 
 #choices button:hover, #start-btn:hover, .retry-btn:hover {
-  background-color: #45a049;
+  background-color: #45a049 !important;
   transform: scale(1.03);
 }
 
+/* 回答・次へボタン */
 #answer-btn, #next-btn {
   display: block;
   margin: 20px auto 10px;
-  padding: 12px;
+  padding: 15px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 
 #answer-btn { background-color: #2196F3; }
 #next-btn { background-color: #FF9800; }
-
-#answer-btn:hover, #next-btn:hover {
-  filter: brightness(1.1);
-  transform: scale(1.03);
-}
 
 .hidden {
   display: none !important;
