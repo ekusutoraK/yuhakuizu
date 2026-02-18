@@ -51,6 +51,11 @@ const choicesEl = document.getElementById("choices");
 const answerBtn = document.getElementById("answer-btn");
 const nextBtn = document.getElementById("next-btn");
 
+// ホーム画面関連
+const homeScreen = document.getElementById("home-screen");
+const quizScreen = document.getElementById("quiz-screen");
+const startBtn = document.getElementById("start-btn");
+
 // 初期化
 function initQuiz() {
   selectedQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 7);
@@ -125,13 +130,12 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// 結果表示 + 点数ごとメッセージ + 再挑戦ボタン
+// 結果表示
 function showResult() {
   choicesEl.innerHTML = "";
   answerBtn.classList.add("hidden");
   nextBtn.classList.add("hidden");
 
-  // 点数ごとのメッセージ
   const messages = {
     0: { title: "一般人級", subtitle: "うわあああああ（発狂）" },
     1: { title: "初見さん級", subtitle: "チャンネル登録はお済ですか？" },
@@ -143,8 +147,7 @@ function showResult() {
     7: { title: "湯原俊哉級", subtitle: "あなたは本人です" }
   };
 
-  const total = selectedQuestions.length;
-  const msg = messages[score] || { title: "結果", subtitle: `(${score}/${total}問正解)` };
+  const msg = messages[score] || { title: "結果", subtitle: `(${score}/7問正解)` };
 
   const titleDiv = document.createElement("div");
   titleDiv.textContent = msg.title.toUpperCase();
@@ -154,29 +157,26 @@ function showResult() {
 
   const subtitleDiv = document.createElement("div");
   subtitleDiv.textContent = msg.subtitle;
-  subtitleDiv.style.fontSize = "16px";
-  subtitleDiv.style.fontWeight = "normal";
 
   questionEl.textContent = "";
   questionEl.appendChild(titleDiv);
   questionEl.appendChild(subtitleDiv);
 
   const retryBtn = document.createElement("button");
-  retryBtn.textContent = "もう一度挑戦";
+  retryBtn.textContent = "タイトルに戻る";
   retryBtn.style.marginTop = "20px";
-  retryBtn.style.padding = "10px";
-  retryBtn.style.width = "100%";
-  retryBtn.style.border = "none";
-  retryBtn.style.borderRadius = "10px";
-  retryBtn.style.backgroundColor = "#2196F3";
-  retryBtn.style.color = "white";
-  retryBtn.style.fontSize = "16px";
-  retryBtn.style.cursor = "pointer";
-  retryBtn.addEventListener("click", () => initQuiz());
+  retryBtn.id = "start-btn"; // デザインを再利用
+  retryBtn.addEventListener("click", () => {
+    quizScreen.classList.add("hidden");
+    homeScreen.classList.remove("hidden");
+  });
 
   choicesEl.appendChild(retryBtn);
 }
 
-// クイズ開始
-initQuiz();
-
+// スタートボタンの処理
+startBtn.addEventListener("click", () => {
+  homeScreen.classList.add("hidden");
+  quizScreen.classList.remove("hidden");
+  initQuiz();
+});
