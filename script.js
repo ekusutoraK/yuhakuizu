@@ -16,8 +16,8 @@ const questions = [
   { question:"ゆはいちゃんねるがデュエプレを始めたのは何弾 ？", choices:["1弾","2弾","4弾","5弾"], answer:"5弾" },
   { question:"ゆはいちゃんねるが初めて当たったデュエマのレアカードは？", choices:["ボルメテウス・ホワイト・ドラゴン","アストラル・リーフ","ミラーフォースドラゴン","ボルシャック・ドラゴン"], answer:"ミラーフォースドラゴン" },
   { question:"ゆはいちゃんねるが初めて盗まれたムシキングのカードは？", choices:["アクティオンゾウカブト","ヘラクレスオオカブト","ミヤマクワガタ","ノコギリクワガタ"], answer:"アクティオンゾウカブト" },
-  { question:"ゆはいちゃんねるは学生時代何部だった？", choices:["吹奏楽部","サッカー部","陸上部","帰宅部"], answer:"サッカー部" },
-  { question:"ゆはいちゃんねるが一番好きなアニメは？", choices:["とある科学の超電磁砲","クレヨンしんちゃん","シュタインズ・ゲート","アニメは見ない"], answer:"シュタインズ・ゲート" },
+  { question:"ゆはいちゃんねるは student 時代何部だった？", choices:["吹奏楽部","サッカー部","陸上部","帰宅部"], answer:"サッカー部" },
+  { question:"ゆはいちゃんねるが一番好きなアニメは？", choices:["とある科学の超電磁砲","クレヨンしちゃん","シュタインズ・ゲート","アニメは見ない"], answer:"シュタインズ・ゲート" },
   { question:"ゆはいちゃんねるが初めて課金したソシャゲは？", choices:["モンスト","原神","デュエプレ","パズドラ"], answer:"パズドラ" },
   { question:"ゆはいちゃんねるが初めてライブ配信をした最高同接は何人？", choices:["2人","20人","22人","0人"], answer:"2人" },
   { question:"ゆはいちゃんねるがデュエプレの次に同接を集めたゲームはなに？", choices:["原神","only up","パズドラ","ポケポケ"], answer:"only up" },
@@ -50,8 +50,6 @@ const questionEl = document.getElementById("question");
 const choicesEl = document.getElementById("choices");
 const answerBtn = document.getElementById("answer-btn");
 const nextBtn = document.getElementById("next-btn");
-
-// ホーム画面関連
 const homeScreen = document.getElementById("home-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const startBtn = document.getElementById("start-btn");
@@ -66,11 +64,9 @@ function initQuiz() {
 function showQuestion() {
   const q = selectedQuestions[currentQuestionIndex];
   questionEl.textContent = `第${currentQuestionIndex + 1}問 / ${selectedQuestions.length}問\n${q.question}`;
-
   choicesEl.innerHTML = "";
   selectedAnswer = null;
   answered = false;
-
   answerBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
 
@@ -79,7 +75,6 @@ function showQuestion() {
     const btn = document.createElement("button");
     btn.textContent = choice;
     btn.className = "choice-btn";
-    btn.style.backgroundColor = "#4CAF50";
     btn.addEventListener("click", () => {
       if (answered) return;
       Array.from(choicesEl.children).forEach(b => b.style.backgroundColor = "#4CAF50");
@@ -157,7 +152,7 @@ function showResult() {
   const retryBtn = document.createElement("button");
   retryBtn.textContent = "タイトルに戻る";
   retryBtn.style.marginTop = "20px";
-  retryBtn.className = "retry-btn"; // スタートボタンと同じ緑デザインを適用
+  retryBtn.className = "retry-btn"; 
   retryBtn.addEventListener("click", () => {
     quizScreen.classList.add("hidden");
     homeScreen.classList.remove("hidden");
@@ -165,7 +160,6 @@ function showResult() {
   choicesEl.appendChild(retryBtn);
 }
 
-// 最初のスタートボタン
 startBtn.addEventListener("click", () => {
   homeScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
