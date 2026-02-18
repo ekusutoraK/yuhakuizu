@@ -16,8 +16,8 @@ const questions = [
   { question:"ゆはいちゃんねるがデュエプレを始めたのは何弾 ？", choices:["1弾","2弾","4弾","5弾"], answer:"5弾" },
   { question:"ゆはいちゃんねるが初めて当たったデュエマのレアカードは？", choices:["ボルメテウス・ホワイト・ドラゴン","アストラル・リーフ","ミラーフォースドラゴン","ボルシャック・ドラゴン"], answer:"ミラーフォースドラゴン" },
   { question:"ゆはいちゃんねるが初めて盗まれたムシキングのカードは？", choices:["アクティオンゾウカブト","ヘラクレスオオカブト","ミヤマクワガタ","ノコギリクワガタ"], answer:"アクティオンゾウカブト" },
-  { question:"ゆはいちゃんねるは student 時代何部だった？", choices:["吹奏楽部","サッカー部","陸上部","帰宅部"], answer:"サッカー部" },
-  { question:"ゆはいちゃんねるが一番好きなアニメは？", choices:["とある科学の超電磁砲","クレヨンしちゃん","シュタインズ・ゲート","アニメは見ない"], answer:"シュタインズ・ゲート" },
+  { question:"ゆはいちゃんねるは学生時代何部だった？", choices:["吹奏楽部","サッカー部","陸上部","帰宅部"], answer:"サッカー部" },
+  { question:"ゆはいちゃんねるが一番好きなアニメは？", choices:["とある科学の超電磁砲","クレヨンしんちゃん","シュタインズ・ゲート","アニメは見ない"], answer:"シュタインズ・ゲート" },
   { question:"ゆはいちゃんねるが初めて課金したソシャゲは？", choices:["モンスト","原神","デュエプレ","パズドラ"], answer:"パズドラ" },
   { question:"ゆはいちゃんねるが初めてライブ配信をした最高同接は何人？", choices:["2人","20人","22人","0人"], answer:"2人" },
   { question:"ゆはいちゃんねるがデュエプレの次に同接を集めたゲームはなに？", choices:["原神","only up","パズドラ","ポケポケ"], answer:"only up" },
@@ -40,8 +40,6 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
-/* questions配列はそのまま使ってください（長いので省略） */
-
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -55,10 +53,14 @@ const nextBtn = document.getElementById("next-btn");
 const homeScreen = document.getElementById("home-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const startBtn = document.getElementById("start-btn");
-
-// BGM用
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
+const howToPlay = document.getElementById("how-to-play");
+
+// 遊び方ガイドの表示
+howToPlay.addEventListener("click", () => {
+  alert("【ゆはクイズ 遊び方】\n1. 全7問がランダムに出題されます。\n2. 選択肢を選んで「回答」をタップ！\n3. 正解数でランクが決まります。全問正解を目指せ！");
+});
 
 function initQuiz() {
   selectedQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 7);
@@ -80,7 +82,6 @@ function showQuestion() {
   shuffledChoices.forEach(choice => {
     const btn = document.createElement("button");
     btn.textContent = choice;
-    btn.className = "choice-btn";
     btn.addEventListener("click", () => {
       if (answered) return;
       Array.from(choicesEl.children).forEach(b => b.classList.remove("selected"));
@@ -153,24 +154,20 @@ function showResult() {
 
   const retryBtn = document.createElement("button");
   retryBtn.textContent = "タイトルに戻る";
-  retryBtn.style.marginTop = "20px";
   retryBtn.className = "retry-btn"; 
   retryBtn.addEventListener("click", () => {
-    // タイトルに戻る時にBGMを止める処理
     bgm.pause();
     bgm.currentTime = 0;
-
     quizScreen.classList.add("hidden");
     homeScreen.classList.remove("hidden");
   });
   choicesEl.appendChild(retryBtn);
 }
 
-// BGM再生付きスタート
 startBtn.addEventListener("click", () => {
   if (bgmSwitch.checked) {
-    bgm.volume = 0.3; // 音量を30%にして再生
-    bgm.play().catch(e => console.log("音声再生エラー:", e));
+    bgm.volume = 0.3;
+    bgm.play().catch(e => console.log("再生エラー:", e));
   }
   homeScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
