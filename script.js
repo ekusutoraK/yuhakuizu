@@ -40,6 +40,10 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
+// --- script.js 全体 ---
+
+/* questions配列は以前と同じなので省略します */
+
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -59,17 +63,15 @@ const closeMenu = document.getElementById("close-menu");
 const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
+const seSwitch = document.getElementById("se-switch"); // 追加
 
-// 効果音の取得
 const soundCorrect = document.getElementById("sound-correct");
 const soundWrong = document.getElementById("sound-wrong");
 const soundQuestion = document.getElementById("sound-question");
 
-// メニュー開閉
 menuTrigger.addEventListener("click", () => sideMenu.classList.toggle("hidden"));
 closeMenu.addEventListener("click", () => sideMenu.classList.add("hidden"));
 
-// 遊び方ガイド
 howToPlay.addEventListener("click", () => {
   alert("【ゆはクイズ 遊び方】\n1. 全7問出題されます\n2. 選択肢を選んで「回答」\n3. 正解数でランクが決定！");
   sideMenu.classList.add("hidden");
@@ -83,9 +85,11 @@ function initQuiz() {
 }
 
 function showQuestion() {
-  // 出題音を再生
-  soundQuestion.currentTime = 0;
-  soundQuestion.play().catch(e => console.log("音源再生待ち:", e));
+  // 出題音を再生（SEスイッチがオンの時だけ）
+  if (seSwitch.checked) {
+    soundQuestion.currentTime = 0;
+    soundQuestion.play().catch(e => console.log(e));
+  }
 
   const q = selectedQuestions[currentQuestionIndex];
   questionEl.textContent = `第${currentQuestionIndex + 1}問 / ${selectedQuestions.length}問\n${q.question}`;
@@ -117,14 +121,19 @@ answerBtn.addEventListener("click", () => {
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
 
-  // 正誤判定と効果音
   if (selectedAnswer === q.answer) {
-    soundCorrect.currentTime = 0;
-    soundCorrect.play();
+    // 正解音（SEスイッチがオンの時だけ）
+    if (seSwitch.checked) {
+      soundCorrect.currentTime = 0;
+      soundCorrect.play();
+    }
     score++;
   } else {
-    soundWrong.currentTime = 0;
-    soundWrong.play();
+    // 不正解音（SEスイッチがオンの時だけ）
+    if (seSwitch.checked) {
+      soundWrong.currentTime = 0;
+      soundWrong.play();
+    }
   }
 
   Array.from(choicesEl.children).forEach(btn => {
@@ -167,7 +176,6 @@ function showResult() {
   };
 
   const msg = messages[score] || { title: "結果", subtitle: "" };
-  
   const titleDiv = document.createElement("div");
   titleDiv.textContent = msg.title.toUpperCase();
   titleDiv.style.fontSize = "24px";
@@ -175,7 +183,6 @@ function showResult() {
   titleDiv.style.marginBottom = "10px";
 
   const subtitleDiv = document.createElement("div");
-  // 正解数をsubtitleに合体させる
   subtitleDiv.textContent = `${msg.subtitle}（${score}問正解）`;
 
   questionEl.textContent = "";
@@ -207,7 +214,8 @@ startBtn.addEventListener("click", () => {
   initQuiz();
 });
 
-// ページ読み込み時にBGMスイッチを確実にオフにする
+// ページ読み込み時にBGMとSEのスイッチを確実にオフにする
 window.addEventListener('load', () => {
   if (bgmSwitch) bgmSwitch.checked = false;
+  if (seSwitch) seSwitch.checked = false;
 });
