@@ -24,6 +24,7 @@ body {
   position: relative;
 }
 
+/* メニューボタン */
 #menu-trigger {
   position: absolute;
   top: 15px;
@@ -36,6 +37,7 @@ body {
   z-index: 10;
 }
 
+/* サイドメニュー */
 #side-menu {
   position: absolute;
   top: 55px;
@@ -69,6 +71,7 @@ body {
   cursor: pointer;
 }
 
+/* ボタン共通 */
 #start-btn, #choices button, .retry-btn {
   display: block;
   margin: 10px auto;
