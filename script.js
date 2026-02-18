@@ -53,13 +53,21 @@ const nextBtn = document.getElementById("next-btn");
 const homeScreen = document.getElementById("home-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const startBtn = document.getElementById("start-btn");
+const menuTrigger = document.getElementById("menu-trigger");
+const sideMenu = document.getElementById("side-menu");
+const closeMenu = document.getElementById("close-menu");
+const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
-const howToPlay = document.getElementById("how-to-play");
 
-// 遊び方ガイドの表示
+// メニュー開閉
+menuTrigger.addEventListener("click", () => sideMenu.classList.toggle("hidden"));
+closeMenu.addEventListener("click", () => sideMenu.classList.add("hidden"));
+
+// 遊び方
 howToPlay.addEventListener("click", () => {
-  alert("【ゆはクイズ 遊び方】\n1. 全7問がランダムに出題されます。\n2. 選択肢を選んで「回答」をタップ！\n3. 正解数でランクが決まります。全問正解を目指せ！");
+  alert("【ゆはクイズ 遊び方】\n1. 全7問出題されます\n2. 選択肢を選んで「回答」\n3. 正解数でランクが決定！");
+  sideMenu.classList.add("hidden");
 });
 
 function initQuiz() {
@@ -160,16 +168,19 @@ function showResult() {
     bgm.currentTime = 0;
     quizScreen.classList.add("hidden");
     homeScreen.classList.remove("hidden");
+    menuTrigger.classList.remove("hidden");
   });
   choicesEl.appendChild(retryBtn);
 }
 
 startBtn.addEventListener("click", () => {
+  sideMenu.classList.add("hidden");
   if (bgmSwitch.checked) {
     bgm.volume = 0.3;
     bgm.play().catch(e => console.log("再生エラー:", e));
   }
   homeScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
+  menuTrigger.classList.add("hidden");
   initQuiz();
 });
