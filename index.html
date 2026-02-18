@@ -11,12 +11,20 @@
     <h1>ゆはクイズ</h1>
 
     <div id="home-screen">
-      <p style="margin-bottom: 20px;">ゆはいちゃんねるマニアッククイズへようこそ！<br>全7問、あなたの愛が試されます。</p>
+      <p style="margin-bottom: 20px;">ゆはいちゃんねるマニアッククイズへようこそ！</p>
       
-      <div class="bgm-setting">
-        <label>
-          <input type="checkbox" id="bgm-switch" checked> BGMを再生する
-        </label>
+      <div class="menu-container">
+        <div class="menu-title">MENU</div>
+        
+        <div class="menu-item">
+          <label>
+            <input type="checkbox" id="bgm-switch" checked> BGM再生
+          </label>
+        </div>
+
+        <div class="menu-item" id="how-to-play">
+          遊び方ガイド
+        </div>
       </div>
 
       <button id="start-btn">クイズをはじめる</button>
