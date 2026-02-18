@@ -23,17 +23,42 @@ body {
   text-align: center;
 }
 
-/* 基本のボタン（緑） */
-#start-btn, 
-#choices button, 
-.retry-btn {
+.quiz-container h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* BGM設定エリアのデザイン */
+.bgm-setting {
+  margin-bottom: 20px;
+}
+
+.bgm-setting label {
+  cursor: pointer;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#bgm-switch {
+  width: 18px;
+  height: 18px;
+}
+
+/* ボタン共通設定（絶対緑） */
+#start-btn, #choices button, .retry-btn {
   display: block;
   margin: 10px auto;
   padding: 15px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  background-color: #4CAF50; /* 緑 */
+  background-color: #4CAF50;
   color: white;
   cursor: pointer;
   font-size: 16px;
@@ -41,27 +66,10 @@ body {
   transition: 0.2s;
 }
 
-/* 【重要】選択された時の色（水色） */
-#choices button.selected {
-  background-color: #00BFFF !important;
-}
-
-/* 正解の色 */
-#choices button.correct-ans {
-  background-color: #00BFFF !important;
-}
-
-/* 不正解の色 */
-#choices button.wrong-ans {
-  background-color: #FF4444 !important;
-}
-
-/* 選ばれなかったボタンを暗くする */
-#choices button.dim-ans {
-  background-color: #CCCCCC !important;
-  color: #333 !important;
-  opacity: 0.6;
-}
+#choices button.selected { background-color: #00BFFF !important; }
+#choices button.correct-ans { background-color: #00BFFF !important; }
+#choices button.wrong-ans { background-color: #FF4444 !important; }
+#choices button.dim-ans { background-color: #CCCCCC !important; color: #333 !important; opacity: 0.6; }
 
 #start-btn:hover, #choices button:hover:not(:disabled) {
   background-color: #45a049;
@@ -77,7 +85,6 @@ body {
   border-radius: 10px;
   color: white;
   font-weight: bold;
-  cursor: pointer;
 }
 
 #answer-btn { background-color: #2196F3; }
