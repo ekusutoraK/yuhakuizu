@@ -40,8 +40,6 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
-/* --- 問題データ(questions)は以前と同じなので省略 --- */
-
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -62,14 +60,16 @@ const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
 
-// 効果音
+// 効果音の取得
 const soundCorrect = document.getElementById("sound-correct");
 const soundWrong = document.getElementById("sound-wrong");
 const soundQuestion = document.getElementById("sound-question");
 
+// メニュー開閉
 menuTrigger.addEventListener("click", () => sideMenu.classList.toggle("hidden"));
 closeMenu.addEventListener("click", () => sideMenu.classList.add("hidden"));
 
+// 遊び方ガイド
 howToPlay.addEventListener("click", () => {
   alert("【ゆはクイズ 遊び方】\n1. 全7問出題されます\n2. 選択肢を選んで「回答」\n3. 正解数でランクが決定！");
   sideMenu.classList.add("hidden");
@@ -83,9 +83,9 @@ function initQuiz() {
 }
 
 function showQuestion() {
-  // 出題音を鳴らす
+  // 出題音を再生
   soundQuestion.currentTime = 0;
-  soundQuestion.play().catch(e => console.log("音源不足:", e));
+  soundQuestion.play().catch(e => console.log("音源再生待ち:", e));
 
   const q = selectedQuestions[currentQuestionIndex];
   questionEl.textContent = `第${currentQuestionIndex + 1}問 / ${selectedQuestions.length}問\n${q.question}`;
@@ -117,6 +117,7 @@ answerBtn.addEventListener("click", () => {
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
 
+  // 正誤判定と効果音
   if (selectedAnswer === q.answer) {
     soundCorrect.currentTime = 0;
     soundCorrect.play();
@@ -165,14 +166,17 @@ function showResult() {
     7: { title: "湯原俊哉級", subtitle: "あなたは本人です" }
   };
 
-  const msg = messages[score] || { title: "結果", subtitle: `(${score}/7問正解)` };
+  const msg = messages[score] || { title: "結果", subtitle: "" };
+  
   const titleDiv = document.createElement("div");
   titleDiv.textContent = msg.title.toUpperCase();
   titleDiv.style.fontSize = "24px";
   titleDiv.style.fontWeight = "bold";
   titleDiv.style.marginBottom = "10px";
+
   const subtitleDiv = document.createElement("div");
-  subtitleDiv.textContent = msg.subtitle;
+  // 正解数をsubtitleに合体させる
+  subtitleDiv.textContent = `${msg.subtitle}（${score}問正解）`;
 
   questionEl.textContent = "";
   questionEl.appendChild(titleDiv);
@@ -203,6 +207,7 @@ startBtn.addEventListener("click", () => {
   initQuiz();
 });
 
+// ページ読み込み時にBGMスイッチを確実にオフにする
 window.addEventListener('load', () => {
   if (bgmSwitch) bgmSwitch.checked = false;
 });
