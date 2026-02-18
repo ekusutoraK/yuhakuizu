@@ -12,6 +12,13 @@
 
     <div id="home-screen">
       <p style="margin-bottom: 20px;">ゆはいちゃんねるマニアッククイズへようこそ！<br>全7問、あなたの愛が試されます。</p>
+      
+      <div class="bgm-setting">
+        <label>
+          <input type="checkbox" id="bgm-switch" checked> BGMを再生する
+        </label>
+      </div>
+
       <button id="start-btn">クイズをはじめる</button>
     </div>
 
@@ -22,6 +29,8 @@
       <button id="next-btn" class="hidden">次へ</button>
     </div>
   </div>
+
+  <audio id="bgm" src="bgm.mp3" loop></audio>
 
   <script src="script.js"></script>
 </body>
