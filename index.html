@@ -9,12 +9,9 @@
 <body>
   <div class="quiz-container">
     <div id="menu-trigger">☰</div>
-
     <h1>ゆはクイズ</h1>
-
     <div id="home-screen">
       <p style="margin-bottom: 40px; line-height: 1.6;">ゆはいちゃんねるマニアッククイズへようこそ！</p>
-      
       <div id="side-menu" class="hidden">
         <div class="menu-content">
           <div class="menu-header">SETTINGS</div>
@@ -23,16 +20,12 @@
               <input type="checkbox" id="bgm-switch"> BGM再生
             </label>
           </div>
-          <div class="menu-row" id="how-to-play">
-            遊び方ガイド
-          </div>
+          <div class="menu-row" id="how-to-play">遊び方ガイド</div>
           <div id="close-menu">とじる</div>
         </div>
       </div>
-
       <button id="start-btn">クイズをはじめる</button>
     </div>
-
     <div id="quiz-screen" class="hidden">
       <div id="question"></div>
       <div id="choices"></div>
@@ -40,9 +33,9 @@
       <button id="next-btn" class="hidden">次へ</button>
     </div>
   </div>
-
   <audio id="bgm" src="bgm.mp3" loop></audio>
-
+  <audio id="sound-correct" src="correct.mp3"></audio>
+  <audio id="sound-wrong" src="wrong.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
