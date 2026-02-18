@@ -56,7 +56,6 @@ const homeScreen = document.getElementById("home-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const startBtn = document.getElementById("start-btn");
 
-// 初期化
 function initQuiz() {
   selectedQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 7);
   currentQuestionIndex = 0;
@@ -64,7 +63,6 @@ function initQuiz() {
   showQuestion();
 }
 
-// 問題を表示
 function showQuestion() {
   const q = selectedQuestions[currentQuestionIndex];
   questionEl.textContent = `第${currentQuestionIndex + 1}問 / ${selectedQuestions.length}問\n${q.question}`;
@@ -92,16 +90,13 @@ function showQuestion() {
   });
 }
 
-// 回答ボタン押下
 answerBtn.addEventListener("click", () => {
   if (!selectedAnswer) {
     alert("選択肢を選んでください！");
     return;
   }
-
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
-
   Array.from(choicesEl.children).forEach(btn => {
     btn.disabled = true;
     if (btn.textContent === q.answer) {
@@ -115,12 +110,10 @@ answerBtn.addEventListener("click", () => {
       btn.style.opacity = "0.6";
     }
   });
-
   answerBtn.classList.add("hidden");
   nextBtn.classList.remove("hidden");
 });
 
-// 次へボタン押下
 nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
   if (currentQuestionIndex >= selectedQuestions.length) {
@@ -130,7 +123,6 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// 結果表示
 function showResult() {
   choicesEl.innerHTML = "";
   answerBtn.classList.add("hidden");
@@ -165,16 +157,15 @@ function showResult() {
   const retryBtn = document.createElement("button");
   retryBtn.textContent = "タイトルに戻る";
   retryBtn.style.marginTop = "20px";
-  retryBtn.id = "start-btn"; // デザインを再利用
+  retryBtn.className = "retry-btn"; // スタートボタンと同じ緑デザインを適用
   retryBtn.addEventListener("click", () => {
     quizScreen.classList.add("hidden");
     homeScreen.classList.remove("hidden");
   });
-
   choicesEl.appendChild(retryBtn);
 }
 
-// スタートボタンの処理
+// 最初のスタートボタン
 startBtn.addEventListener("click", () => {
   homeScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
