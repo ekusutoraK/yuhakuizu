@@ -10,7 +10,7 @@ const questions = [
   { question:"ゆはいちゃんねるは元々グループYouTuberでしたが何人グループだった？", choices:["そんなグループ存在しない","5人グループ","6人グループ","48人グループ"], answer:"6人グループ" },
   { question:"ゆはいちゃんねるが持ってる資格として正しくないのは？", choices:["保育士資格","幼稚園免許","子育て心理カウンセラー","危険物取扱者"], answer:"危険物取扱者" },
   { question:"ゆはいちゃんねるが彼女に振られた場所は", choices:["はま寿司","くら寿司","かっぱ寿司","板前寿司"], answer:"はま寿司" },
-  { question:"ゆはいちゃんねるが彼女に振られた際に言われた言葉は？", choices:["終わりにしませんか。","友達に戻りませんか。","デートに寿司屋は…。","なかったことにしましょう。"], answer:"友達に戻りませんか。" },
+  { question:"ゆはいちゃんねるが彼女に振られた際に言われた言葉は？", choices:["終わりにしませんか。","友達に戻りませんか.","デートに寿司屋は…。","なかったことにしましょう。"], answer:"友達に戻りませんか。" },
   { question:"ゆはいちゃんねるが失恋して伸びるきっかけになった動画は？", choices:["求愛バジュラ","失恋ランデス","失恋バジュラ","恋愛バジュラ"], answer:"失恋バジュラ" },
   { question:"ゆはいちゃんねる史上一番伸びの悪かった動画はなに？", choices:["グリフォンさん？","ドングリルは強い！","ドラフトデュエル","アラガピユイ"], answer:"アラガピユイ" },
   { question:"ゆはいちゃんねるがデュエプレを始めたのは何弾 ？", choices:["1弾","2弾","4弾","5弾"], answer:"5弾" },
@@ -40,10 +40,6 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
-// --- script.js 全体 ---
-
-/* questions配列は以前と同じなので省略します */
-
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -63,7 +59,7 @@ const closeMenu = document.getElementById("close-menu");
 const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
-const seSwitch = document.getElementById("se-switch"); // 追加
+const seSwitch = document.getElementById("se-switch");
 
 const soundCorrect = document.getElementById("sound-correct");
 const soundWrong = document.getElementById("sound-wrong");
@@ -85,7 +81,6 @@ function initQuiz() {
 }
 
 function showQuestion() {
-  // 出題音を再生（SEスイッチがオンの時だけ）
   if (seSwitch.checked) {
     soundQuestion.currentTime = 0;
     soundQuestion.play().catch(e => console.log(e));
@@ -122,14 +117,12 @@ answerBtn.addEventListener("click", () => {
   const q = selectedQuestions[currentQuestionIndex];
 
   if (selectedAnswer === q.answer) {
-    // 正解音（SEスイッチがオンの時だけ）
     if (seSwitch.checked) {
       soundCorrect.currentTime = 0;
       soundCorrect.play();
     }
     score++;
   } else {
-    // 不正解音（SEスイッチがオンの時だけ）
     if (seSwitch.checked) {
       soundWrong.currentTime = 0;
       soundWrong.play();
@@ -181,7 +174,6 @@ function showResult() {
   titleDiv.style.fontSize = "24px";
   titleDiv.style.fontWeight = "bold";
   titleDiv.style.marginBottom = "10px";
-
   const subtitleDiv = document.createElement("div");
   subtitleDiv.textContent = `${msg.subtitle}（${score}問正解）`;
 
@@ -214,7 +206,16 @@ startBtn.addEventListener("click", () => {
   initQuiz();
 });
 
-// ページ読み込み時にBGMとSEのスイッチを確実にオフにする
+// 効果音スイッチの確認ダイアログ
+seSwitch.addEventListener('change', () => {
+  if (seSwitch.checked) {
+    const confirmed = confirm("効果音を有効にしますか？\n（スピーカーの音量にご注意ください）");
+    if (!confirmed) {
+      seSwitch.checked = false;
+    }
+  }
+});
+
 window.addEventListener('load', () => {
   if (bgmSwitch) bgmSwitch.checked = false;
   if (seSwitch) seSwitch.checked = false;
