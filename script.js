@@ -40,6 +40,8 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
+/* --- 問題データ(questions)は以前と同じなので省略 --- */
+
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -59,8 +61,11 @@ const closeMenu = document.getElementById("close-menu");
 const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
+
+// 効果音
 const soundCorrect = document.getElementById("sound-correct");
 const soundWrong = document.getElementById("sound-wrong");
+const soundQuestion = document.getElementById("sound-question");
 
 menuTrigger.addEventListener("click", () => sideMenu.classList.toggle("hidden"));
 closeMenu.addEventListener("click", () => sideMenu.classList.add("hidden"));
@@ -78,6 +83,10 @@ function initQuiz() {
 }
 
 function showQuestion() {
+  // 出題音を鳴らす
+  soundQuestion.currentTime = 0;
+  soundQuestion.play().catch(e => console.log("音源不足:", e));
+
   const q = selectedQuestions[currentQuestionIndex];
   questionEl.textContent = `第${currentQuestionIndex + 1}問 / ${selectedQuestions.length}問\n${q.question}`;
   choicesEl.innerHTML = "";
@@ -108,7 +117,6 @@ answerBtn.addEventListener("click", () => {
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
 
-  // 音を鳴らす判定
   if (selectedAnswer === q.answer) {
     soundCorrect.currentTime = 0;
     soundCorrect.play();
