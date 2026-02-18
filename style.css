@@ -1,6 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
-  background-image: url('https://raw.githubusercontent.com/ekusutoraK/yuhakuizu/main/background.jpg');
+  background-image: url('https://raw.githubusercontent.com/ekusutorak.github.io/yuhakuizu/main/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,11 +34,11 @@ body {
   white-space: pre-line;
 }
 
-/* 選択肢のボタン */
-#choices button {
+/* 選択肢ボタン、スタートボタン、タイトルに戻るボタン共通（緑色） */
+#choices button, #start-btn, .retry-btn {
   display: block;
   margin: 10px auto;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -47,33 +47,34 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: 0.2s;
+  font-weight: bold;
 }
 
-#choices button:hover {
+/* ホバー時の動きを統一 */
+#choices button:hover, #start-btn:hover, .retry-btn:hover {
   background-color: #45a049;
   transform: scale(1.03);
 }
 
-/* 下部の各種操作ボタン */
-#start-btn, #answer-btn, #next-btn {
+/* 回答ボタン（青）と次へボタン（オレンジ） */
+#answer-btn, #next-btn {
   display: block;
-  margin: 10px auto;
-  padding: 15px;
+  margin: 20px auto 10px;
+  padding: 12px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   transition: 0.2s;
   color: white;
   font-weight: bold;
 }
 
-#start-btn { background-color: #FF9800; } /* オレンジ */
-#answer-btn { background-color: #2196F3; } /* 青 */
-#next-btn { background-color: #FF9800; } /* オレンジ */
+#answer-btn { background-color: #2196F3; }
+#next-btn { background-color: #FF9800; }
 
-#start-btn:hover, #answer-btn:hover, #next-btn:hover {
+#answer-btn:hover, #next-btn:hover {
   filter: brightness(1.1);
   transform: scale(1.03);
 }
