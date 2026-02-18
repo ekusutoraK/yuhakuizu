@@ -8,22 +8,25 @@
 </head>
 <body>
   <div class="quiz-container">
+    <div id="menu-trigger">☰</div>
+
     <h1>ゆはクイズ</h1>
 
     <div id="home-screen">
-      <p style="margin-bottom: 20px;">ゆはいちゃんねるマニアッククイズへようこそ！</p>
+      <p style="margin-bottom: 40px; line-height: 1.6;">ゆはいちゃんねるマニアッククイズへようこそ！</p>
       
-      <div class="menu-container">
-        <div class="menu-title">MENU</div>
-        
-        <div class="menu-item">
-          <label>
-            <input type="checkbox" id="bgm-switch" checked> BGM再生
-          </label>
-        </div>
-
-        <div class="menu-item" id="how-to-play">
-          遊び方ガイド
+      <div id="side-menu" class="hidden">
+        <div class="menu-content">
+          <div class="menu-header">SETTINGS</div>
+          <div class="menu-row">
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <input type="checkbox" id="bgm-switch" checked> BGM再生
+            </label>
+          </div>
+          <div class="menu-row" id="how-to-play">
+            遊び方ガイド
+          </div>
+          <div id="close-menu">とじる</div>
         </div>
       </div>
 
@@ -31,7 +34,7 @@
     </div>
 
     <div id="quiz-screen" class="hidden">
-      <div id="question">ここに問題が表示されます</div>
+      <div id="question"></div>
       <div id="choices"></div>
       <button id="answer-btn">回答</button>
       <button id="next-btn" class="hidden">次へ</button>
