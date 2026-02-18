@@ -34,6 +34,7 @@ body {
   white-space: pre-line;
 }
 
+/* 選択肢のボタン */
 #choices button {
   display: block;
   margin: 10px auto;
@@ -53,49 +54,30 @@ body {
   transform: scale(1.03);
 }
 
-#answer-btn, #next-btn {
+/* 下部の各種操作ボタン */
+#start-btn, #answer-btn, #next-btn {
   display: block;
   margin: 10px auto;
-  padding: 10px;
+  padding: 15px;
   width: 100%;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: 0.2s;
   color: white;
+  font-weight: bold;
 }
 
-#answer-btn {
-  background-color: #2196F3;
-}
+#start-btn { background-color: #FF9800; } /* オレンジ */
+#answer-btn { background-color: #2196F3; } /* 青 */
+#next-btn { background-color: #FF9800; } /* オレンジ */
 
-#answer-btn:hover {
-  background-color: #1976D2;
-  transform: scale(1.03);
-}
-
-#next-btn {
-  background-color: #FF9800;
-}
-
-#next-btn:hover {
-  background-color: #F57C00;
+#start-btn:hover, #answer-btn:hover, #next-btn:hover {
+  filter: brightness(1.1);
   transform: scale(1.03);
 }
 
 .hidden {
   display: none !important;
-}
-
-.correct {
-  background-color: #2196F3 !important;
-}
-
-.incorrect {
-  background-color: #f44336 !important;
-}
-
-.dim {
-  opacity: 0.4;
 }
