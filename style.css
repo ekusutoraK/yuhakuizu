@@ -1,6 +1,7 @@
 body {
   font-family: "Arial", sans-serif;
-  background-image: url('https://raw.githubusercontent.com/ekusutorak.github.io/yuhakuizu/main/background.jpg');
+  /* URLを修正しました */
+  background-image: url('https://raw.githubusercontent.com/ekusutorak/yuhakuizu/main/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,7 +35,7 @@ body {
   white-space: pre-line;
 }
 
-/* 選択肢ボタン、スタートボタン、タイトルに戻るボタン共通（緑色） */
+/* 共通の緑ボタン（選択肢・スタート・戻る） */
 #choices button, #start-btn, .retry-btn {
   display: block;
   margin: 10px auto;
@@ -50,13 +51,11 @@ body {
   font-weight: bold;
 }
 
-/* ホバー時の動きを統一 */
 #choices button:hover, #start-btn:hover, .retry-btn:hover {
   background-color: #45a049;
   transform: scale(1.03);
 }
 
-/* 回答ボタン（青）と次へボタン（オレンジ） */
 #answer-btn, #next-btn {
   display: block;
   margin: 20px auto 10px;
