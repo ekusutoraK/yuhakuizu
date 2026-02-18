@@ -59,12 +59,12 @@ const closeMenu = document.getElementById("close-menu");
 const howToPlay = document.getElementById("how-to-play");
 const bgm = document.getElementById("bgm");
 const bgmSwitch = document.getElementById("bgm-switch");
+const soundCorrect = document.getElementById("sound-correct");
+const soundWrong = document.getElementById("sound-wrong");
 
-// メニュー開閉
 menuTrigger.addEventListener("click", () => sideMenu.classList.toggle("hidden"));
 closeMenu.addEventListener("click", () => sideMenu.classList.add("hidden"));
 
-// 遊び方
 howToPlay.addEventListener("click", () => {
   alert("【ゆはクイズ 遊び方】\n1. 全7問出題されます\n2. 選択肢を選んで「回答」\n3. 正解数でランクが決定！");
   sideMenu.classList.add("hidden");
@@ -107,11 +107,21 @@ answerBtn.addEventListener("click", () => {
   }
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
+
+  // 音を鳴らす判定
+  if (selectedAnswer === q.answer) {
+    soundCorrect.currentTime = 0;
+    soundCorrect.play();
+    score++;
+  } else {
+    soundWrong.currentTime = 0;
+    soundWrong.play();
+  }
+
   Array.from(choicesEl.children).forEach(btn => {
     btn.disabled = true;
     if (btn.textContent === q.answer) {
       btn.classList.add("correct-ans");
-      if(selectedAnswer === q.answer) score++;
     } else if (btn.textContent === selectedAnswer) {
       btn.classList.add("wrong-ans");
     } else {
@@ -185,7 +195,6 @@ startBtn.addEventListener("click", () => {
   initQuiz();
 });
 
-// ページ読み込み時にBGMスイッチを確実にオフにする(強制命令)
 window.addEventListener('load', () => {
   if (bgmSwitch) bgmSwitch.checked = false;
 });
