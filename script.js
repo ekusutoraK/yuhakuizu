@@ -40,6 +40,8 @@ const questions = [
   { question:"ゆはいちゃんねるの好きなポケモンは？", choices:["ミミッキュ","ピカチュウ","ライチュウ","ピチュー"], answer:"ミミッキュ" }
 ];
 
+/* questions配列はそのまま使ってください（長いので省略） */
+
 let currentQuestionIndex = 0;
 let selectedQuestions = [];
 let selectedAnswer = null;
@@ -53,6 +55,10 @@ const nextBtn = document.getElementById("next-btn");
 const homeScreen = document.getElementById("home-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const startBtn = document.getElementById("start-btn");
+
+// BGM用
+const bgm = document.getElementById("bgm");
+const bgmSwitch = document.getElementById("bgm-switch");
 
 function initQuiz() {
   selectedQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 7);
@@ -77,7 +83,6 @@ function showQuestion() {
     btn.className = "choice-btn";
     btn.addEventListener("click", () => {
       if (answered) return;
-      // すべてのボタンから selected クラスを消して、押したやつにだけつける
       Array.from(choicesEl.children).forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedAnswer = choice;
@@ -93,16 +98,15 @@ answerBtn.addEventListener("click", () => {
   }
   answered = true;
   const q = selectedQuestions[currentQuestionIndex];
-  
   Array.from(choicesEl.children).forEach(btn => {
     btn.disabled = true;
     if (btn.textContent === q.answer) {
-      btn.classList.add("correct-ans"); // 正解は水色
+      btn.classList.add("correct-ans");
       if(selectedAnswer === q.answer) score++;
     } else if (btn.textContent === selectedAnswer) {
-      btn.classList.add("wrong-ans"); // 間違いは赤
+      btn.classList.add("wrong-ans");
     } else {
-      btn.classList.add("dim-ans"); // その他はグレー
+      btn.classList.add("dim-ans");
     }
   });
   answerBtn.classList.add("hidden");
@@ -152,13 +156,22 @@ function showResult() {
   retryBtn.style.marginTop = "20px";
   retryBtn.className = "retry-btn"; 
   retryBtn.addEventListener("click", () => {
+    // タイトルに戻る時にBGMを止める処理
+    bgm.pause();
+    bgm.currentTime = 0;
+
     quizScreen.classList.add("hidden");
     homeScreen.classList.remove("hidden");
   });
   choicesEl.appendChild(retryBtn);
 }
 
+// BGM再生付きスタート
 startBtn.addEventListener("click", () => {
+  if (bgmSwitch.checked) {
+    bgm.volume = 0.3; // 音量を30%にして再生
+    bgm.play().catch(e => console.log("音声再生エラー:", e));
+  }
   homeScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
   initQuiz();
