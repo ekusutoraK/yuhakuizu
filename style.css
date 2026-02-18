@@ -21,51 +21,57 @@ body {
   max-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   text-align: center;
+  position: relative;
 }
 
-.quiz-container h1 {
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-/* メニューエリア */
-.menu-container {
+/* 左上のメニューボタン */
+#menu-trigger {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  margin-bottom: 25px;
-  overflow: hidden;
+  border-radius: 5px;
+  z-index: 10;
 }
 
-.menu-title {
-  background: rgba(255, 255, 255, 0.1);
+/* 浮かび上がるメニュー */
+#side-menu {
+  position: absolute;
+  top: 55px;
+  left: 15px;
+  z-index: 100;
+  width: 180px;
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid #4CAF50;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+}
+
+.menu-content { padding: 10px; }
+.menu-header { font-size: 10px; color: #4CAF50; margin-bottom: 5px; letter-spacing: 1px; }
+
+.menu-row {
+  padding: 12px 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu-row:hover { background: rgba(255,255,255,0.05); }
+
+#close-menu {
+  margin-top: 10px;
   font-size: 12px;
-  padding: 5px;
+  text-align: center;
   color: #aaa;
-  letter-spacing: 2px;
-}
-
-.menu-item {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  font-size: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.menu-item:last-child { border-bottom: none; }
-.menu-item:hover { background: rgba(255, 255, 255, 0.05); }
-
-.menu-item label {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 緑ボタン（スタート・選択肢・戻る） */
+/* ボタン（緑） */
 #start-btn, #choices button, .retry-btn {
   display: block;
   margin: 10px auto;
@@ -78,40 +84,16 @@ body {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: 0.2s;
 }
 
-/* 状態別のボタン色 */
+/* 選択・正解・不正解の状態 */
 #choices button.selected { background-color: #00BFFF !important; }
 #choices button.correct-ans { background-color: #00BFFF !important; }
 #choices button.wrong-ans { background-color: #FF4444 !important; }
 #choices button.dim-ans { background-color: #CCCCCC !important; color: #333 !important; opacity: 0.6; }
 
-#start-btn:hover, #choices button:hover:not(:disabled) {
-  background-color: #45a049;
-  transform: scale(1.03);
-}
+#answer-btn { background-color: #2196F3; margin-top: 20px; width:100%; padding:15px; border-radius:10px; border:none; color:#fff; font-weight:bold; cursor:pointer;}
+#next-btn { background-color: #FF9800; margin-top: 20px; width:100%; padding:15px; border-radius:10px; border:none; color:#fff; font-weight:bold; cursor:pointer;}
 
-/* 回答・次へボタン */
-#answer-btn, #next-btn {
-  display: block;
-  margin: 20px auto 10px;
-  padding: 15px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#answer-btn { background-color: #2196F3; }
-#next-btn { background-color: #FF9800; }
-
+#question { font-size: 18px; margin-bottom: 20px; white-space: pre-line; }
 .hidden { display: none !important; }
-
-#question {
-  font-size: 18px;
-  margin-bottom: 20px;
-  white-space: pre-line;
-}
